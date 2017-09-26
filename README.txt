@@ -80,5 +80,4 @@ After this the averages are calculated into sapply function into colMeans functi
 
 write.table function is used for this purpose and the rowname and colname are dropped
 
-After t
-7.
+

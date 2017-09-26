@@ -54,6 +54,8 @@ names(final_labelleddf)<-gsub("\\()","",names(final_labelleddf))
 #Calculating  the average of each variable for each activity and each subject.
 
 
+
+
 final_labelleddf<-sapply(final_labelleddf,as.numeric)
 
 final_labelleddf<-as.data.frame(final_labelleddf)
@@ -61,16 +63,17 @@ final_labelleddf<-as.data.frame(final_labelleddf)
 s<-split(final_labelleddf,list(final_labelleddf$subject,final_labelleddf$activityname))
 
 m<-sapply(s,colMeans)
-
+m<-t(m)
 #Storing the tidy data set in a file named file.txt
 
 m1<-as.data.frame(m)
 
-m2<-m1[1:(nrow(m1)-2),1:ncol(m1)]
+m1$activityname<-activity_labels[,2][match(m1$activityname,activity_labels[,1])]
 
-x<-write.table(m2,file = "./file.txt",row.names = FALSE,col.names = FALSE)
 
-y<-read.table("file.txt",col.names = FALSE)
+x<-write.table(m1,file = "./file.txt",row.names = FALSE)
+
+y<-read.table("file.txt")
 
 y
 
